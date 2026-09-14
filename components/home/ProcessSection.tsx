@@ -54,47 +54,78 @@ export default function ProcessSection() {
           </p>
         </div>
 
-        {/* 4-Step Process Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 relative">
-          {steps.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <div
-                key={item.step}
-                className="relative rounded-2xl bg-white border border-[#e3e8ee] p-6 sm:p-7 shadow-[0_1px_3px_rgba(0,55,112,0.06)] flex flex-col justify-between hover:border-[#533afd]/40 transition-colors"
-              >
-                <div className="space-y-4">
-                  {/* Step Eyebrow */}
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-medium px-2.5 py-1 rounded-full bg-[#b9b9f9]/50 text-[#4434d4]">
-                      Step {item.step}
-                    </span>
-                    <div className="w-8 h-8 rounded-lg bg-[#f6f9fc] flex items-center justify-center text-[#533afd]">
-                      <Icon className="w-4 h-4" />
-                    </div>
-                  </div>
+        {/* Desktop Horizontal Timeline Connector (lg: and above) */}
+        <div className="hidden lg:block relative mb-8">
+          {/* Connecting Line running left to right */}
+          <div className="absolute top-1/2 left-[12.5%] right-[12.5%] h-[2px] bg-[#e3e8ee] -translate-y-1/2 z-0" />
 
-                  <div className="space-y-1">
-                    <h3 className="text-xl font-light text-[#0d253d] tracking-[-0.2px]">
-                      {item.title}
-                    </h3>
-                    <div className="text-xs font-medium text-[#64748d]">
-                      {item.subtitle}
-                    </div>
-                  </div>
-
-                  <p className="text-[14px] font-light text-[#64748d] leading-relaxed">
-                    {item.description}
-                  </p>
+          {/* 4 Evenly Spaced Step Nodes */}
+          <div className="grid grid-cols-4 relative z-10">
+            {steps.map((item) => (
+              <div key={`node-${item.step}`} className="flex flex-col items-center">
+                <div className="flex items-center justify-center w-8 h-8 rounded-full bg-white border-2 border-[#533afd] shadow-sm ring-4 ring-[#b9b9f9]/30">
+                  <span className="w-2.5 h-2.5 rounded-full bg-[#533afd]" />
                 </div>
-
-                {/* Progress Indicator */}
-                <div className="pt-6 mt-4 border-t border-[#f6f9fc] flex items-center gap-2 text-xs font-mono text-[#64748d]">
-                  <span>Phase {index + 1} of 4</span>
-                </div>
+                <span className="mt-2 text-xs font-mono font-medium text-[#533afd]">
+                  Stage {item.step}
+                </span>
               </div>
-            );
-          })}
+            ))}
+          </div>
+        </div>
+
+        {/* 4-Step Process Grid (Desktop 4-col, Mobile vertical timeline with connecting line) */}
+        <div className="relative">
+          {/* Mobile Vertical Connecting Line (<lg) */}
+          <div className="lg:hidden absolute top-6 bottom-6 left-6 w-[2px] bg-[#e3e8ee] z-0" />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 relative z-10">
+            {steps.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={item.step}
+                  className="relative rounded-2xl bg-white border border-[#e3e8ee] p-6 sm:p-7 shadow-[0_1px_3px_rgba(0,55,112,0.06)] flex flex-col justify-between hover:border-[#533afd]/40 transition-colors"
+                >
+                  <div className="space-y-4">
+                    {/* Step Eyebrow with Mobile Node Indicator */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2.5">
+                        {/* Mobile filled dot node (<lg) */}
+                        <div className="lg:hidden flex items-center justify-center w-6 h-6 rounded-full bg-white border-2 border-[#533afd] shadow-sm flex-shrink-0">
+                          <span className="w-2 h-2 rounded-full bg-[#533afd]" />
+                        </div>
+                        <span className="text-xs font-mono font-medium px-2.5 py-1 rounded-full bg-[#b9b9f9]/50 text-[#4434d4]">
+                          Step {item.step}
+                        </span>
+                      </div>
+                      <div className="w-8 h-8 rounded-lg bg-[#f6f9fc] flex items-center justify-center text-[#533afd]">
+                        <Icon className="w-4 h-4" />
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <h3 className="text-xl font-light text-[#0d253d] tracking-[-0.2px]">
+                        {item.title}
+                      </h3>
+                      <div className="text-xs font-medium text-[#64748d]">
+                        {item.subtitle}
+                      </div>
+                    </div>
+
+                    <p className="text-[14px] font-light text-[#64748d] leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+
+                  {/* Progress Indicator */}
+                  <div className="pt-6 mt-4 border-t border-[#f6f9fc] flex items-center gap-2 text-xs font-mono text-[#64748d]">
+                    <span>Phase {index + 1} of 4</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

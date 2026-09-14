@@ -1,0 +1,239 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #533afd;
+  --color-primary-deep: #4434d4;
+  --color-primary-press: #2e2b8c;
+  --color-primary-soft: #665efd;
+  --color-primary-subdued: #b9b9f9;
+  --color-brand-dark-900: #1c1e54;
+  --color-ink: #0d253d;
+  --color-ink-secondary: #273951;
+  --color-ink-mute: #64748d;
+  --color-ink-mute-2: #61718a;
+  --color-on-primary: #ffffff;
+  --color-canvas: #ffffff;
+  --color-canvas-soft: #f6f9fc;
+  --color-canvas-cream: #f5e9d4;
+  --color-hairline: #e3e8ee;
+  --color-hairline-input: #a8c3de;
+  --color-ruby: #ea2261;
+  --color-magenta: #f96bee;
+  --color-lemon: #9b6829;
+  --color-shadow-blue: #003770;
+
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 9999px;
+
+  --font-inter: var(--font-inter), system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  --primary: #533afd;
+  --primary-deep: #4434d4;
+  --primary-press: #2e2b8c;
+  --primary-soft: #665efd;
+  --primary-subdued: #b9b9f9;
+  --brand-dark-900: #1c1e54;
+  --ink: #0d253d;
+  --ink-secondary: #273951;
+  --ink-mute: #64748d;
+  --ink-mute-2: #61718a;
+  --on-primary: #ffffff;
+  --canvas: #ffffff;
+  --canvas-soft: #f6f9fc;
+  --canvas-cream: #f5e9d4;
+  --hairline: #e3e8ee;
+  --hairline-input: #a8c3de;
+  --ruby: #ea2261;
+  --magenta: #f96bee;
+  --lemon: #9b6829;
+  --shadow-blue: #003770;
+}
+
+/* Global Typography & OpenType Stylistic Set 01 */
+html {
+  scroll-behavior: auto; /* Lenis handles smooth scrolling */
+}
+
+body {
+  background-color: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  font-feature-settings: "ss01" on;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Tabular Figures for Money and Numeric cells */
+.tnum,
+.tabular-nums {
+  font-feature-settings: "tnum" on, "ss01" on;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.42px;
+}
+
+/* Elevation Levels from design-system/SKILL.md */
+.shadow-level-1 {
+  box-shadow: 0 1px 3px rgba(0, 55, 112, 0.08);
+}
+
+.shadow-level-2 {
+  box-shadow: 0 8px 24px rgba(0, 55, 112, 0.08), 0 2px 6px rgba(0, 55, 112, 0.04);
+}
+
+.shadow-level-3 {
+  box-shadow: 0 20px 48px rgba(0, 55, 112, 0.12), 0 4px 12px rgba(0, 55, 112, 0.06);
+}
+
+/* Gradient Mesh Hero Backdrop & Ambient Drift */
+.gradient-mesh-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.95;
+}
+
+.gradient-mesh-blob-1 {
+  position: absolute;
+  top: -15%;
+  left: 5%;
+  width: 65vw;
+  height: 55vw;
+  max-width: 900px;
+  max-height: 700px;
+  background: radial-gradient(circle, rgba(245, 233, 212, 0.85) 0%, rgba(245, 233, 212, 0) 70%);
+  filter: blur(60px);
+  will-change: transform;
+  animation: mesh-drift-1 38s ease-in-out infinite alternate;
+}
+
+.gradient-mesh-blob-2 {
+  position: absolute;
+  top: -20%;
+  right: -5%;
+  width: 55vw;
+  height: 55vw;
+  max-width: 800px;
+  max-height: 800px;
+  background: radial-gradient(circle, rgba(83, 58, 253, 0.28) 0%, rgba(102, 94, 253, 0.12) 40%, rgba(83, 58, 253, 0) 70%);
+  filter: blur(75px);
+  will-change: transform;
+  animation: mesh-drift-2 44s ease-in-out infinite alternate;
+}
+
+.gradient-mesh-blob-3 {
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  width: 50vw;
+  height: 45vw;
+  max-width: 750px;
+  max-height: 650px;
+  background: radial-gradient(circle, rgba(234, 34, 97, 0.18) 0%, rgba(249, 107, 238, 0.12) 45%, rgba(234, 34, 97, 0) 75%);
+  filter: blur(80px);
+  will-change: transform;
+  animation: mesh-drift-3 48s ease-in-out infinite alternate;
+}
+
+.gradient-mesh-blob-4 {
+  position: absolute;
+  top: -5%;
+  left: 45%;
+  width: 45vw;
+  height: 40vw;
+  max-width: 650px;
+  max-height: 600px;
+  background: radial-gradient(circle, rgba(155, 104, 41, 0.16) 0%, rgba(185, 185, 249, 0.22) 50%, rgba(155, 104, 41, 0) 75%);
+  filter: blur(70px);
+  will-change: transform;
+  animation: mesh-drift-4 35s ease-in-out infinite alternate;
+}
+
+@keyframes mesh-drift-1 {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(40px, 25px) scale(1.08);
+  }
+  100% {
+    transform: translate(-30px, 45px) scale(0.96);
+  }
+}
+
+@keyframes mesh-drift-2 {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(-50px, 35px) scale(1.1);
+  }
+  100% {
+    transform: translate(25px, -20px) scale(0.95);
+  }
+}
+
+@keyframes mesh-drift-3 {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(35px, -35px) scale(1.06);
+  }
+  100% {
+    transform: translate(-45px, 20px) scale(0.94);
+  }
+}
+
+@keyframes mesh-drift-4 {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  50% {
+    transform: translate(-30px, 30px) scale(1.07);
+  }
+  100% {
+    transform: translate(35px, -15px) scale(0.93);
+  }
+}
+
+/* Marquee Proof Strip Animation */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Accessibility: Safe Reduced Motion Fallback */
+@media (prefers-reduced-motion: reduce) {
+  .gradient-mesh-blob-1,
+  .gradient-mesh-blob-2,
+  .gradient-mesh-blob-3,
+  .gradient-mesh-blob-4,
+  .animate-marquee {
+    animation: none !important;
+    transform: none !important;
+  }
+}

@@ -1,18 +1,21 @@
+import AmbientNetworkCanvas from "@/components/home/AmbientNetworkCanvas";
 import HeroSection from "@/components/home/HeroSection";
-import TrustBar from "@/components/home/TrustBar";
-import PillarsSection from "@/components/home/PillarsSection";
+import ServicesGrid from "@/components/home/ServicesGrid";
+import HonestPositioning from "@/components/home/HonestPositioning";
 import ProcessSection from "@/components/home/ProcessSection";
-import ProofSection from "@/components/home/ProofSection";
 import FinalCTA from "@/components/home/FinalCTA";
 
 export default function Home() {
   return (
-    <main className="flex-1 flex flex-col w-full">
+    <main className="relative flex-1 flex flex-col w-full">
+      {/* Ambient Network Layer (Behind homepage sections) */}
+      <AmbientNetworkCanvas />
+
+      {/* Reordered Sections: Hero → Services grid → Honest positioning → How we work → CTA band */}
       <HeroSection />
-      <TrustBar />
-      <PillarsSection />
+      <ServicesGrid />
+      <HonestPositioning />
       <ProcessSection />
-      <ProofSection />
       <FinalCTA />
     </main>
   );

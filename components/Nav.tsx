@@ -1,99 +1,264 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon, ChevronDown } from "lucide-react";
 
 export default function Nav() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
+  const [mounted, setMounted] = useState(false);
 
-  const navLinks = [
-    { label: "Home", href: "/" },
-    { label: "Services", href: "/services" },
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
+  useEffect(() => {
+    setMounted(true);
+    const activeTheme = document.documentElement.getAttribute("data-theme") as "dark" | "light" | null;
+    if (activeTheme) {
+      setTheme(activeTheme);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const nextTheme = theme === "dark" ? "light" : "dark";
+    setTheme(nextTheme);
+    document.documentElement.setAttribute("data-theme", nextTheme);
+    try {
+      localStorage.setItem("theme", nextTheme);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const serviceItems = [
+    { label: "Business Automations", href: "/services#business-automations", category: "Automation" },
+    { label: "Integrations", href: "/services#integrations", category: "Automation" },
+    { label: "AI Agents", href: "/services#ai-agents", category: "Automation" },
+    { label: "ChatBot & Call Agents", href: "/services#chatbot-call-agents", category: "Automation" },
+    { label: "SEO", href: "/services#seo", category: "Marketing" },
+    { label: "Design & Video Editing", href: "/services#design-video", category: "Marketing" },
+    { label: "Web Design & Branding", href: "/services#web-design-branding", category: "Marketing" },
+    { label: "Trading Bots", href: "/services#trading-bots", category: "Trading" },
   ];
 
   const bookingUrl = "https://cal.com/miharbi-damha-omxkej/15min";
 
   return (
-    <header className="sticky top-0 z-50 w-full px-4 sm:px-6 lg:px-8 pt-4 pb-2 backdrop-blur-md bg-white/80 transition-all">
-      <div className="max-w-7xl mx-auto flex items-center justify-between h-14 sm:h-16 px-4 sm:px-6 rounded-full bg-white/90 border border-[#e3e8ee] shadow-[0_1px_3px_rgba(0,55,112,0.08)]">
-        {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-2.5 transition-opacity hover:opacity-90">
-          <div className="relative h-8 w-8 sm:h-9 sm:w-9 rounded-lg overflow-hidden flex items-center justify-center bg-white">
+    <header className="sticky top-0 z-50 w-full bg-canvas border-b border-hairline">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
+        {/* Left: Brand Logo */}
+        <Link href="/" className="flex items-center gap-3 group">
+          <div className="relative h-8 w-8 rounded-lg overflow-hidden flex items-center justify-center bg-canvas-raised border border-hairline">
             <Image
               src="/DevSolution.png"
-              alt="DevSolutions Logo"
-              width={36}
-              height={36}
+              alt="DevSolutions"
+              width={28}
+              height={28}
               className="object-contain"
               priority
             />
           </div>
-          <span className="font-light tracking-[-0.3px] text-lg sm:text-xl text-[#0d253d] font-sans">
-            Dev<span className="font-normal text-[#533afd]">Solutions</span>
+          <span className="font-display text-xl font-bold tracking-tight text-ink">
+            DevSolutions<span className="text-primary">.</span>
           </span>
         </Link>
 
-        {/* Desktop Navigation Links */}
+        {/* Center: Desktop Navigation Links */}
         <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((item) => (
+          <Link
+            href="/"
+            className="text-[15px] font-medium text-ink-secondary hover:text-ink transition-colors duration-150"
+          >
+            Home
+          </Link>
+
+          {/* Services Dropdown */}
+          <div className="relative group py-2">
             <Link
-              key={item.label}
-              href={item.href}
-              className="text-[15px] font-light text-[#273951] hover:text-[#533afd] transition-colors duration-150"
+              href="/services"
+              className="text-[15px] font-medium text-ink-secondary hover:text-ink transition-colors duration-150 inline-flex items-center gap-1.5"
             >
-              {item.label}
+              <span>Services</span>
+              <ChevronDown className="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-180 text-ink-mute group-hover:text-ink" />
             </Link>
-          ))}
+
+            {/* Dropdown Flyout */}
+            <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-84 opacity-0 invisible translate-y-1 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-150 pointer-events-none group-hover:pointer-events-auto z-50">
+              <div className="p-2 rounded-xl bg-canvas-raised border border-hairline shadow-2xl space-y-1">
+                <div className="px-3 py-2 border-b border-hairline flex items-center justify-between">
+                  <span className="caption text-ink font-semibold uppercase tracking-wider text-[11px]">
+                    All Services
+                  </span>
+                  <Link
+                    href="/services"
+                    className="text-[12px] font-medium text-primary hover:text-primary-hover transition-colors"
+                  >
+                    View Hub &rarr;
+                  </Link>
+                </div>
+                <div className="py-1">
+                  {serviceItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="flex items-center justify-between px-3 py-2 rounded-lg text-[13px] text-ink-secondary hover:text-ink hover:bg-canvas transition-colors"
+                    >
+                      <span className="font-medium">{item.label}</span>
+                      <span className="text-[10px] font-mono text-ink-mute uppercase tracking-wider">
+                        {item.category}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <Link
+            href="/about"
+            className="text-[15px] font-medium text-ink-secondary hover:text-ink transition-colors duration-150"
+          >
+            About
+          </Link>
+          <Link
+            href="/contact"
+            className="text-[15px] font-medium text-ink-secondary hover:text-ink transition-colors duration-150"
+          >
+            Contact
+          </Link>
         </nav>
 
-        {/* Desktop Primary CTA Button */}
-        <div className="hidden md:flex items-center">
+        {/* Right: Actions (Theme toggle + Book a call) */}
+        <div className="hidden md:flex items-center gap-4">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+            className="p-2.5 rounded-[10px] text-ink-secondary hover:text-ink hover:bg-canvas-raised border border-hairline transition-colors"
+          >
+            {mounted && theme === "light" ? (
+              <Moon className="w-4 h-4 text-ink" />
+            ) : (
+              <Sun className="w-4 h-4 text-ink" />
+            )}
+          </button>
+
           <a
             href={bookingUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center text-[14px] font-normal text-white bg-[#533afd] hover:bg-[#4434d4] active:bg-[#2e2b8c] px-4 py-2 rounded-full transition-all duration-150 shadow-sm active:scale-[0.98]"
+            className="btn-primary text-[15px] !py-2.5 !px-5"
           >
             Book a call
           </a>
         </div>
 
-        {/* Mobile Hamburger Toggle */}
-        <button
-          type="button"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-[#273951] hover:text-[#0d253d] hover:bg-[#f6f9fc] transition-colors focus:outline-none"
-          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileMenuOpen}
-        >
-          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+        {/* Mobile: Controls (Theme toggle + Hamburger) */}
+        <div className="flex md:hidden items-center gap-2">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+            className="p-2 rounded-[6px] text-ink-secondary hover:text-ink hover:bg-canvas-raised border border-hairline transition-colors"
+          >
+            {mounted && theme === "light" ? (
+              <Moon className="w-4 h-4 text-ink" />
+            ) : (
+              <Sun className="w-4 h-4 text-ink" />
+            )}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 rounded-[6px] text-ink hover:bg-canvas-raised border border-hairline transition-colors focus:outline-none"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <div className="md:hidden mt-2 p-4 rounded-2xl bg-white border border-[#e3e8ee] shadow-[0_8px_24px_rgba(0,55,112,0.08)] flex flex-col gap-3 animate-in fade-in duration-200">
-          {navLinks.map((item) => (
+        <div className="md:hidden border-t border-hairline bg-canvas px-6 py-6 space-y-4 max-h-[80vh] overflow-y-auto">
+          <nav className="flex flex-col space-y-2">
             <Link
-              key={item.label}
-              href={item.href}
+              href="/"
               onClick={() => setMobileMenuOpen(false)}
-              className="text-base font-light text-[#0d253d] px-3 py-2 rounded-lg hover:bg-[#f6f9fc] transition-colors"
+              className="heading-sm text-ink hover:text-primary py-2 transition-colors"
             >
-              {item.label}
+              Home
             </Link>
-          ))}
-          <div className="pt-2 border-t border-[#e3e8ee]">
+
+            {/* Mobile Services Accordion */}
+            <div className="py-1">
+              <div className="flex items-center justify-between py-2">
+                <Link
+                  href="/services"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="heading-sm text-ink hover:text-primary transition-colors"
+                >
+                  Services
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                  className="p-1.5 text-ink-mute hover:text-ink rounded-md"
+                  aria-label="Toggle services list"
+                >
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform ${mobileServicesOpen ? "rotate-180" : ""}`}
+                  />
+                </button>
+              </div>
+
+              {mobileServicesOpen && (
+                <div className="pl-3 py-2 space-y-1.5 border-l border-hairline my-1">
+                  <Link
+                    href="/services"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block py-1.5 text-sm font-semibold text-primary"
+                  >
+                    &rarr; All Services Hub
+                  </Link>
+                  {serviceItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="block py-1 text-sm text-ink-secondary hover:text-ink transition-colors"
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Link
+              href="/about"
+              onClick={() => setMobileMenuOpen(false)}
+              className="heading-sm text-ink hover:text-primary py-2 transition-colors"
+            >
+              About
+            </Link>
+            <Link
+              href="/contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="heading-sm text-ink hover:text-primary py-2 transition-colors"
+            >
+              Contact
+            </Link>
+          </nav>
+          <div className="pt-4 border-t border-hairline">
             <a
               href={bookingUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
-              className="w-full flex items-center justify-center text-sm font-medium text-white bg-[#533afd] hover:bg-[#4434d4] active:bg-[#2e2b8c] px-4 py-3 rounded-full transition-colors min-h-[44px]"
+              className="btn-primary w-full text-center min-h-[48px]"
             >
               Book a call
             </a>

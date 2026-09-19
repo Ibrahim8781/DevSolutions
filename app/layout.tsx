@@ -1,36 +1,42 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import SmoothScroll from "@/components/SmoothScroll";
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-inter",
   display: "swap",
 });
 
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-space-grotesk",
+  display: "swap",
+});
+
 export const viewport: Viewport = {
-  themeColor: "#533afd",
+  themeColor: "#0B0B0E",
   width: "device-width",
   initialScale: 1,
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://devsolutions.agency"),
-  title: "DevSolutions | Applied AI, Automation & Growth Systems",
+  title: "DevSolutions | Backend Automation & Applied AI Studio",
   description:
-    "We build the custom automations, AI agents, and growth systems that run your business without expanding headcount.",
+    "We build custom automations, integrations, and autonomous AI agents for businesses without in-house engineering teams.",
   icons: {
     icon: "/DevSolution.png",
     apple: "/DevSolution.png",
   },
   openGraph: {
-    title: "DevSolutions | Applied AI, Automation & Growth Systems",
+    title: "DevSolutions | Backend Automation & Applied AI Studio",
     description:
-      "We build the custom automations, AI agents, and growth systems that run your business without expanding headcount.",
+      "We build custom automations, integrations, and autonomous AI agents for businesses without in-house engineering teams.",
     url: "https://devsolutions.agency",
     siteName: "DevSolutions",
     images: [
@@ -46,15 +52,41 @@ export const metadata: Metadata = {
   },
 };
 
+const themeScript = `
+  (function() {
+    try {
+      var stored = localStorage.getItem('theme');
+      if (stored === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else if (stored === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans bg-white text-[#0d253d] selection:bg-[#b9b9f9] selection:text-[#1c1e54]">
-        <SmoothScroll />
+    <html
+      lang="en"
+      data-theme="dark"
+      suppressHydrationWarning
+      className={`${inter.variable} ${spaceGrotesk.variable} h-full`}
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="min-h-full flex flex-col bg-canvas text-ink font-body selection:bg-primary selection:text-on-primary antialiased">
         <Nav />
         {children}
         <Footer />

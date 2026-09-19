@@ -1,32 +1,18 @@
 import type { Metadata } from "next";
-import ServicesHero from "@/components/services/ServicesHero";
-import PillarGrowthAutomation from "@/components/services/PillarGrowthAutomation";
-import PillarMarketingCreative from "@/components/services/PillarMarketingCreative";
-import PillarTradingTech from "@/components/services/PillarTradingTech";
-import ServicesFAQ from "@/components/services/ServicesFAQ";
-import FinalCTA from "@/components/home/FinalCTA";
+import ServicesPageClient from "@/components/services/ServicesPageClient";
 
 export const metadata: Metadata = {
-  title: "Services Hub | DevSolutions",
+  title: "Services | DevSolutions",
   description:
-    "Explore our three service pillars: Growth & Automation, Marketing & Creative, and Trading Technologies. High-impact systems built to eliminate manual operational friction.",
+    "A flat suite of 8 core services built to deliver clear operational results. Backend automations, integrations, AI agents, and strategy execution.",
   openGraph: {
-    title: "Services Hub | DevSolutions",
+    title: "Services | DevSolutions",
     description:
-      "Explore our three service pillars: Growth & Automation, Marketing & Creative, and Trading Technologies. High-impact systems built to eliminate manual operational friction.",
+      "A flat suite of 8 core services built to deliver clear operational results. Backend automations, integrations, AI agents, and strategy execution.",
     url: "https://devsolutions.agency/services",
   },
 };
 
 export default function ServicesPage() {
-  return (
-    <main className="flex-1 flex flex-col w-full">
-      <ServicesHero />
-      <PillarGrowthAutomation />
-      <PillarMarketingCreative />
-      <PillarTradingTech />
-      <ServicesFAQ />
-      <FinalCTA />
-    </main>
-  );
+  return <ServicesPageClient />;
 }

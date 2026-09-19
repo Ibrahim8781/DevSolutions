@@ -9,9 +9,14 @@ export default function Footer() {
     {
       title: "Services",
       links: [
-        { label: "Growth & Automation", href: "/services#growth-automation" },
-        { label: "Marketing & Creative", href: "/services#marketing-creative" },
-        { label: "Trading Technologies", href: "/services#trading-technologies" },
+        { label: "Business Automations", href: "/services#business-automations" },
+        { label: "Integrations", href: "/services#integrations" },
+        { label: "AI Agents", href: "/services#ai-agents" },
+        { label: "ChatBot & Call Agents", href: "/services#chatbot-call-agents" },
+        { label: "SEO", href: "/services#seo" },
+        { label: "Design & Video Editing", href: "/services#design-video" },
+        { label: "Web Design & Lead Gen", href: "/services#web-design-branding" },
+        { label: "Trading Bots", href: "/services#trading-bots" },
       ],
     },
     {
@@ -19,67 +24,68 @@ export default function Footer() {
       links: [
         { label: "About Us", href: "/about" },
         { label: "How We Work", href: "/#how-we-work" },
-        { label: "Client Proof", href: "/#proof" },
+        { label: "Services Hub", href: "/services" },
+        { label: "Contact", href: "/contact" },
       ],
     },
     {
       title: "Contact",
       links: [
         { label: "Book a Strategy Call", href: bookingUrl, external: true },
-        { label: "Contact Us", href: "/contact" },
-        { label: "Direct Inquiries", href: "mailto:contact@devsolutions.agency", external: true },
+        { label: "Send an Email", href: "mailto:contact@devsolutions.agency", external: true },
+        { label: "Contact Form", href: "/contact" },
       ],
     },
     {
       title: "Legal",
       links: [
-        { label: "Privacy Policy", href: "/privacy" },
-        { label: "Terms of Service", href: "/terms" },
-        { label: "Trading Disclaimer", href: "/trading-disclaimer" },
+        { label: "Privacy Policy", href: "/legal/privacy-policy" },
+        { label: "Terms of Service", href: "/legal/terms-of-service" },
+        { label: "Trading Disclaimer", href: "/legal/trading-disclaimer" },
       ],
     },
   ];
 
   return (
-    <footer className="w-full bg-white border-t border-[#e3e8ee] mt-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-10 lg:gap-12 pb-12 border-b border-[#e3e8ee]">
-          {/* Brand Column */}
-          <div className="md:col-span-2 space-y-4">
-            <Link href="/" className="inline-flex items-center gap-2.5">
-              <div className="relative h-8 w-8 rounded-lg overflow-hidden flex items-center justify-center">
+    <footer className="w-full bg-canvas-sunken border-t border-hairline text-ink-mute mt-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-12 pb-14 border-b border-hairline">
+          {/* Brand Info */}
+          <div className="md:col-span-2 space-y-4 w-full max-w-[420px]">
+            <Link href="/" className="inline-flex items-center gap-3">
+              <div className="relative h-8 w-8 rounded-lg overflow-hidden flex items-center justify-center bg-canvas-raised border border-hairline">
                 <Image
                   src="/DevSolution.png"
                   alt="DevSolutions Logo"
-                  width={32}
-                  height={32}
+                  width={28}
+                  height={28}
                   className="object-contain"
                 />
               </div>
-              <span className="font-light tracking-[-0.3px] text-xl text-[#0d253d]">
-                Dev<span className="font-normal text-[#533afd]">Solutions</span>
+              <span className="font-display text-xl font-bold tracking-tight text-ink">
+                DevSolutions<span className="text-primary">.</span>
               </span>
             </Link>
-            <p className="text-[14px] font-light leading-relaxed text-[#64748d] max-w-sm">
-              We build the backend automations, applied AI agents, and creative growth systems that scale businesses without expanding engineering overhead.
+            <p className="body-sm text-ink-mute leading-relaxed max-w-[380px]">
+              A technology-enabled growth and automation studio. We combine backend automations, applied AI agents, and creative execution for businesses without in-house engineers.
             </p>
             <div className="pt-2">
               <a
                 href={bookingUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center text-[13px] font-medium text-[#533afd] hover:text-[#4434d4] transition-colors"
+                className="inline-flex items-center text-sm font-semibold text-primary hover:text-primary-hover transition-colors"
               >
                 Schedule an introductory call &rarr;
               </a>
             </div>
           </div>
 
-          {/* Nav Columns: Services, Company, Contact, Legal */}
+          {/* Links Grid */}
           <div className="md:col-span-3 grid grid-cols-2 sm:grid-cols-4 gap-8">
             {footerGroups.map((group) => (
-              <div key={group.title} className="space-y-3">
-                <h4 className="text-[12px] font-medium uppercase tracking-wider text-[#0d253d]">
+              <div key={group.title} className="space-y-4">
+                <h4 className="caption font-bold text-ink uppercase tracking-wider">
                   {group.title}
                 </h4>
                 <ul className="space-y-2.5">
@@ -90,14 +96,14 @@ export default function Footer() {
                           href={link.href}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[13px] font-light text-[#64748d] hover:text-[#0d253d] transition-colors"
+                          className="body-sm text-ink-mute hover:text-ink transition-colors"
                         >
                           {link.label}
                         </a>
                       ) : (
                         <Link
                           href={link.href}
-                          className="text-[13px] font-light text-[#64748d] hover:text-[#0d253d] transition-colors"
+                          className="body-sm text-ink-mute hover:text-ink transition-colors"
                         >
                           {link.label}
                         </Link>
@@ -110,21 +116,19 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Compliance & Legal Disclaimer Row */}
-        <div className="pt-8 pb-4 text-[12px] leading-relaxed text-[#64748d] space-y-2">
+        {/* Mandatory Trading Technologies Compliance Disclaimer */}
+        <div className="py-8 border-b border-hairline caption text-ink-mute space-y-2">
           <p>
-            <strong className="font-medium text-[#273951]">Trading Technologies Disclaimer:</strong> Trading bot content and strategy automations are engineered strictly for technical execution and operational efficiency. DevSolutions is not a registered financial advisor or broker-dealer. Nothing on this website constitutes financial or investment advice, and past automated strategy performance does not guarantee future financial results.
+            <strong className="font-semibold text-ink-secondary">Trading Technologies Compliance Notice:</strong> Trading bot content and strategy automations are engineered strictly for technical execution and operational efficiency. DevSolutions is not a registered financial advisor or broker-dealer. Nothing on this website constitutes financial or investment advice, and past automated strategy performance does not guarantee future financial results.
           </p>
         </div>
 
-        {/* Bottom Copyright Row */}
-        <div className="pt-4 flex flex-col sm:flex-row items-center justify-between text-[13px] text-[#64748d] gap-4">
-          <p>© {currentYear} DevSolutions Agency. All rights reserved.</p>
-          <div className="flex items-center gap-6">
-            <span className="inline-flex items-center gap-1.5 text-xs text-[#64748d]">
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-              All systems operational
-            </span>
+        {/* Copyright & Status */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 caption text-ink-mute">
+          <p>&copy; {currentYear} DevSolutions. All rights reserved.</p>
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-success"></span>
+            <span>All systems operational</span>
           </div>
         </div>
       </div>

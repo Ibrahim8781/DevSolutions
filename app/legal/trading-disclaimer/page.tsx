@@ -1,81 +1,77 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, ShieldAlert } from "lucide-react";
+import { BRAND, FOUNDERS } from "@/data/site";
 
-{/* PLACEHOLDER LEGAL TEXT — have this reviewed by a lawyer before this site goes live */}
+// PLACEHOLDER LEGAL TEXT — have this reviewed by a lawyer before this site goes live.
 
 export const metadata: Metadata = {
-  title: "Trading Disclaimer | DevSolutions",
-  description: "Trading Technologies Compliance Notice and regulatory disclaimers.",
+  title: `Trading Disclaimer | ${BRAND.name}`,
+  description: `Risk disclosure for trading bots and trading software built by ${BRAND.name}.`,
 };
 
 export default function TradingDisclaimerPage() {
   return (
-    <main className="w-full min-h-screen bg-canvas text-ink py-16 sm:py-24">
-      {/* PLACEHOLDER LEGAL TEXT — have this reviewed by a lawyer before this site goes live */}
+    <main className="flex-1 w-full py-16 sm:py-24">
       <article className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Navigation Breadcrumb */}
-        <div className="mb-8">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 text-xs font-mono text-ink-mute hover:text-primary transition-colors duration-150"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>Return to Home</span>
-          </Link>
-        </div>
+        <Link href="/" className="inline-flex items-center gap-2 font-mono text-[12px] text-ink-mute hover:text-accent transition-colors">
+          <ArrowLeft className="w-3.5 h-3.5" />
+          Back to home
+        </Link>
 
-        {/* Document Header */}
-        <header className="pb-8 border-b border-hairline">
-          <div className="mb-3">
-            <span className="tag-category !text-xs !py-1 !px-3 font-mono">Compliance</span>
-          </div>
-          <h1 className="heading-lg sm:text-4xl font-display font-bold text-ink tracking-tight">
-            Trading Technologies Compliance Notice
-          </h1>
-          <p className="caption font-mono text-ink-mute mt-3">
-            Regulatory &amp; Operational Risk Disclosure
-          </p>
+        <header className="mt-10 border-b border-hairline pb-8">
+          <p className="label-mono text-accent">Legal</p>
+          <h1 className="display-section mt-4 text-ink">Trading Disclaimer</h1>
         </header>
 
-        {/* Document Body */}
-        <div className="pt-8 body-md text-ink-secondary leading-relaxed sm:leading-loose space-y-8">
-          <div className="flex items-start gap-4 p-5 rounded-xl bg-canvas-raised border border-hairline">
-            <ShieldAlert className="w-5 h-5 text-primary shrink-0 mt-1" />
-            <p className="body-md text-ink leading-relaxed">
-              Trading bot content, strategy automation, and related technical services offered by [Company Legal Name] are engineered strictly for technical execution and operational efficiency.
+        <div className="pt-8 space-y-8 text-[16px] leading-relaxed text-ink-secondary">
+          <div className="flex items-start gap-4 rounded-xl border border-hairline-strong bg-canvas-raised p-5">
+            <ShieldAlert className="w-5 h-5 shrink-0 mt-1 text-action" />
+            <p className="text-ink">
+              {BRAND.name} builds trading software, such as trading bots, Expert Advisors for MetaTrader 5 and
+              TradingView automations, that follows rules provided or approved by the client. We are software
+              developers, not financial advisors.
             </p>
           </div>
 
           <section className="space-y-4">
-            <h2 className="heading-md font-semibold text-ink">
-              Important Disclosures
-            </h2>
-            <ul className="list-disc pl-5 space-y-3 text-ink-secondary">
+            <h2 className="heading-sm text-ink">Important disclosures</h2>
+            <ul className="list-disc pl-5 space-y-3">
+              <li>{BRAND.name} is not a registered financial advisor, broker-dealer or investment advisor.</li>
               <li>
-                <strong className="text-ink">[Company Legal Name]</strong> is not a registered financial advisor, broker-dealer, or investment advisor.
+                Nothing on this website, or in any software we build, is financial, investment, tax or trading advice,
+                or a recommendation to buy or sell any asset.
               </li>
               <li>
-                Nothing on this website, or in any trading automation we build, constitutes financial, investment, or trading advice.
+                No trading bot or strategy is guaranteed to make a profit or avoid losses. Past performance, including
+                backtests, simulations and live results, does not predict future results.
               </li>
               <li>
-                Past performance of any automated trading strategy — whether backtested or live — does not guarantee future results.
+                Trading forex, crypto, stocks and other markets carries a high risk of loss, and you may lose more than
+                you invest. Only trade with money you can afford to lose.
               </li>
               <li>
-                Trading involves risk, including the risk of loss of principal. You are solely responsible for your own trading decisions and strategy logic.
+                Any bot we build executes the strategy logic you provide or approve. You remain solely responsible for
+                your trading decisions, account settings and results.
               </li>
               <li>
-                Any strategy automation we build executes the logic you provide or approve — we do not design, recommend, or warrant the profitability of any trading strategy.
+                Software can fail because of bugs, broker or exchange outages, internet problems or market conditions.
+                Always monitor live trading.
               </li>
             </ul>
           </section>
 
-          <section className="space-y-3 pt-6 border-t border-hairline">
-            <h2 className="heading-sm font-semibold text-ink">
-              Contact
-            </h2>
+          <section className="space-y-3 border-t border-hairline pt-6">
+            <h2 className="heading-sm text-ink">Questions</h2>
             <p>
-              Questions about this notice: [Contact Email]
+              Contact us at{" "}
+              {FOUNDERS.map((f, i) => (
+                <span key={f.email}>
+                  {i > 0 && " or "}
+                  <a href={`mailto:${f.email}`} className="text-accent hover:underline">{f.email}</a>
+                </span>
+              ))}
+              .
             </p>
           </section>
         </div>

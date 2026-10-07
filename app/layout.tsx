@@ -1,31 +1,25 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Instrument_Sans, JetBrains_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
+import StarfieldBackground from "@/components/StarfieldBackground";
 import { BRAND, SITE_URL } from "@/data/site";
 
-const bricolage = Bricolage_Grotesque({
+const geist = Geist({
   subsets: ["latin"],
-  variable: "--font-bricolage",
+  variable: "--font-geist",
   display: "swap",
 });
 
-const instrument = Instrument_Sans({
+const geistMono = Geist_Mono({
   subsets: ["latin"],
-  variable: "--font-instrument",
-  display: "swap",
-});
-
-const jetbrains = JetBrains_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-jetbrains",
+  variable: "--font-geist-mono",
   display: "swap",
 });
 
 export const viewport: Viewport = {
-  themeColor: "#0A0D12",
+  themeColor: "#060910",
   width: "device-width",
   initialScale: 1,
 };
@@ -59,11 +53,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${bricolage.variable} ${instrument.variable} ${jetbrains.variable} h-full`}
-    >
-      <body className="min-h-full flex flex-col bg-canvas text-ink font-body selection:bg-accent selection:text-canvas antialiased">
+    <html lang="en" className={`${geist.variable} ${geistMono.variable} h-full`}>
+      <body className="min-h-full flex flex-col text-ink font-sans antialiased selection:bg-accent selection:text-canvas">
+        <StarfieldBackground />
         <Nav />
         {children}
         <Footer />

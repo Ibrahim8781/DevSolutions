@@ -1,72 +1,62 @@
-import Image from "next/image";
-import { ArrowUpRight, ArrowDown, Check } from "lucide-react";
-import Reveal from "@/components/Reveal";
-import { BOOKING_URL, PROMISES, SERVICES } from "@/data/site";
+import { ArrowRight, Check } from "lucide-react";
+import { BOOKING_URL, PROMISES, STATS } from "@/data/site";
 
 export default function Hero() {
   return (
-    <section id="top" className="relative overflow-hidden border-b border-hairline">
-      <div className="dot-grid absolute inset-0 opacity-40 [mask-image:radial-gradient(ellipse_at_70%_40%,black,transparent_70%)]" aria-hidden="true" />
+    <section id="top" className="relative flex min-h-[calc(100svh-64px)] flex-col">
+      <div className="flex flex-1 items-center">
+        <div className="max-w-7xl 2xl:max-w-352 mx-auto w-full px-5 sm:px-8 2xl:px-10 py-20 sm:py-28 text-center">
+          <span className="inline-flex items-center rounded-full border border-hairline bg-surface px-3.5 py-1.5 backdrop-blur-sm">
+            <span className="eyebrow">Websites · Trading bots · Automation</span>
+          </span>
 
-      {/* Oversized brand mark, cropped by the section edge */}
-      <Image
-        src="/nyxel-mark.png"
-        alt=""
-        width={640}
-        height={640}
-        priority
-        className="pointer-events-none absolute -right-40 top-10 w-[520px] opacity-[0.07] sm:opacity-10 lg:-right-24 lg:top-6 lg:w-[640px] lg:opacity-[0.16]"
-        aria-hidden="true"
-      />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 sm:pt-24 sm:pb-28">
-        <Reveal className="max-w-4xl">
-          <p className="label-mono text-accent">Web · Trading bots · Automation</p>
-
-          <h1 className="display-hero mt-6 text-ink text-balance">
-            Websites, trading bots and automation for businesses that want to grow{" "}
-            <span className="text-accent">without more busywork.</span>
+          <h1 className="text-display mx-auto mt-8 max-w-4xl text-balance">
+            We build the systems that help your business grow while you sleep.
           </h1>
 
-          <p className="body-lg mt-7 max-w-2xl text-ink-secondary">
-            Tell us what slows you down. We build the website, the bot or the system that handles it, then hand
-            you the keys.
+          <p className="text-lead mx-auto mt-6 max-w-2xl text-balance">
+            Websites that bring in customers, trading bots that follow your rules 24/7, and automation that takes
+            the repetitive work off your team&apos;s plate.
           </p>
 
-          <div className="mt-10 flex flex-col sm:flex-row gap-3">
-            <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="btn-action">
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="btn-primary w-full sm:w-auto">
               Book a free 15-min call
-              <ArrowUpRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4" />
             </a>
-            <a href="#services" className="btn-ghost">
-              See what we build
-              <ArrowDown className="w-4 h-4" />
+            <a href="#services" className="btn-secondary w-full sm:w-auto">
+              Explore services
             </a>
           </div>
 
-          <ul className="mt-10 flex flex-wrap gap-x-7 gap-y-3 text-[15px] text-ink-secondary">
+          <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[14px] text-ink-mute">
             {PROMISES.map((p) => (
-              <li key={p.title} className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-accent" aria-hidden="true" />
+              <li key={p.title} className="flex items-center gap-1.5">
+                <Check className="w-3.5 h-3.5 text-accent" aria-hidden="true" />
                 {p.title}
               </li>
             ))}
           </ul>
-        </Reveal>
+        </div>
+      </div>
 
-        {/* Quick jump to each service */}
-        <Reveal className="mt-16 sm:mt-20 grid grid-cols-1 sm:grid-cols-3 border-t border-hairline">
-          {SERVICES.map((s, i) => (
-            <a
-              key={s.id}
-              href={`#${s.id}`}
-              className="group flex items-baseline gap-4 py-5 sm:pr-6 border-b sm:border-b-0 border-hairline sm:[&:not(:first-child)]:pl-6 sm:[&:not(:first-child)]:border-l"
+      <div className="border-t border-hairline bg-canvas/40 backdrop-blur-sm">
+        <dl className="max-w-7xl 2xl:max-w-352 mx-auto px-5 sm:px-8 2xl:px-10 grid grid-cols-2 lg:grid-cols-4">
+          {STATS.map((stat, i) => (
+            <div
+              key={stat.label}
+              className={`py-7 sm:py-8 border-hairline ${i % 2 === 1 ? "border-l pl-5 sm:pl-8" : ""} ${
+                i >= 2 ? "border-t lg:border-t-0" : ""
+              } ${i === 2 ? "lg:border-l lg:pl-8" : ""}`}
             >
-              <span className="label-mono text-ink-mute">0{i + 1}</span>
-              <span className="heading-sm text-ink group-hover:text-accent transition-colors">{s.label}</span>
-            </a>
+              <dt className="sr-only">{stat.label}</dt>
+              <dd className="text-[clamp(1.75rem,3vw,2.25rem)] font-semibold tracking-[-0.03em] text-ink">
+                {stat.value}
+              </dd>
+              <dd className="mt-1 text-[14px] text-ink-mute">{stat.label}</dd>
+            </div>
           ))}
-        </Reveal>
+        </dl>
       </div>
     </section>
   );

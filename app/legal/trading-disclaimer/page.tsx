@@ -20,13 +20,13 @@ export default function TradingDisclaimerPage() {
         </Link>
 
         <header className="mt-10 border-b border-hairline pb-8">
-          <p className="label-mono text-accent">Legal</p>
-          <h1 className="display-section mt-4 text-ink">Trading Disclaimer</h1>
+          <p className="eyebrow">Legal</p>
+          <h1 className="text-h2 mt-5">Trading Disclaimer</h1>
         </header>
 
         <div className="pt-8 space-y-8 text-[16px] leading-relaxed text-ink-secondary">
-          <div className="flex items-start gap-4 rounded-xl border border-hairline-strong bg-canvas-raised p-5">
-            <ShieldAlert className="w-5 h-5 shrink-0 mt-1 text-action" />
+          <div className="flex items-start gap-4 rounded-xl panel p-5">
+            <ShieldAlert className="w-5 h-5 shrink-0 mt-1 text-warning" />
             <p className="text-ink">
               {BRAND.name} builds trading software, such as trading bots, Expert Advisors for MetaTrader 5 and
               TradingView automations, that follows rules provided or approved by the client. We are software
@@ -35,7 +35,7 @@ export default function TradingDisclaimerPage() {
           </div>
 
           <section className="space-y-4">
-            <h2 className="heading-sm text-ink">Important disclosures</h2>
+            <h2 className="text-h4">Important disclosures</h2>
             <ul className="list-disc pl-5 space-y-3">
               <li>{BRAND.name} is not a registered financial advisor, broker-dealer or investment advisor.</li>
               <li>
@@ -62,7 +62,7 @@ export default function TradingDisclaimerPage() {
           </section>
 
           <section className="space-y-3 border-t border-hairline pt-6">
-            <h2 className="heading-sm text-ink">Questions</h2>
+            <h2 className="text-h4">Questions</h2>
             <p>
               Contact us at{" "}
               {FOUNDERS.map((f, i) => (
